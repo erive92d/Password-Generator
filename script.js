@@ -17,35 +17,39 @@ function writePassword() {
 
 
 function generatePassword() {
-  var specialChar = "!#$%&'()*+-./:;<=>?@[\]^_`{|}~"
+  //SHUFFLE CHARACTERS
+  function shufflePass(array) {
+    // for(var i = array.length - 1; i > 0; i--) {
+      for(var i = 0; i < array.length; i++) {
+      var randomNum = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[randomNum];
+      array[randomNum] = temp;
+    }
+    return array;
+
+  }
+  var specialChar = "!#$%&'()*+-./:;<=>?@[\]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+  var mixedChar = shufflePass(specialChar.split(''));//CONVERTS STRING TO ARRAY
   var passLength = prompt('How long???');
   var tempPass = []; //<-- EMPTY ARRAY
-  var randomNumber = Math.floor(Math.random() * specialChar.length);
+  var randomNumber = Math.floor(Math.random() * mixedChar.length);
 
   for(i = 0; i < passLength; i++) {
     if(passLength < 8 || passLength > 128) {
       result = alert('DENIED!, PLEASE ENTER BETWEEN 8 - 128!!')
       break; //DENIED
     } else {
-      tempPass.push(specialChar[i])//WILL ADD EVERY CHARAC AT [i]
+      tempPass.push(mixedChar[i])//WILL ADD EVERY CHARAC AT [i]
     }
     }
-  
-    // function shuffleChar(char) {
-    //   var randomNumber = Math.floor(Math.random() * specialChar.length);
-    //   var result = []
-    //   for(var i = 0; i < char.length; i++) {
-    //     result.push(char[i * randomNumber])
-    //   }
-
-    //   return result.join('')
-    // }
-
   
   var passComplete = tempPass.join(''); // REMOVES COMMAS BETWEEN BECAUSE ITS AN ARRAY
   var result = document.querySelector('#password').innerHTML = passComplete;
   return result
 }
+
+
 
 
 
