@@ -64,7 +64,13 @@ function generatePassword() {
   } else {
     result = 'Invalid'
   }
- 
+  
+  var upperOrLower = prompt('Press L for lowerCase, U for upperCase')
+  if(upperOrLower.toLowerCase() === 'l') {
+    result = result.toLowerCase()
+  } else {
+    result = result.toLocaleUpperCase();
+  }
   
 
   var passLength = prompt('How long???');
