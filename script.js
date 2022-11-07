@@ -17,87 +17,90 @@ function writePassword() {
 
 
 function generatePassword() {
+  //------------FUNCTIONS-----------------
 
-
-  function includeSpec(words) {
-    var options = prompt('Want special Characters? y/n')
-    if (options.toLowerCase === 'n') {
-      words = 'ABCDEFGHIJKLMNOP1234567890'
-    } else {
-      return words
-    }
-  }
-  //SHUFFLE CHARACTERS
+// FUNCTION FOR SHUFFLING LETTERS
   function shufflePass(array) {
-    // for(var i = array.length - 1; i > 0; i--) {
-    for (var i = 0; i < array.length; i++) {
+    var newArray = array.split('')
+    for (var i = 0; i < newArray.length; i++) {
       var randomNum = Math.floor(Math.random() * (i + 1));
-      var temp = array[i];
-      array[i] = array[randomNum];
-      array[randomNum] = temp;
+      var temp = newArray[i];
+      newArray[i] = newArray[randomNum];
+      newArray[randomNum] = temp;
     }
-    return array;
-
+    return newArray;
+// FUNCTION FOR LENGTH OF PASSWORD
   }
-
-  // function includeSpec(words) {
-  //   var options = prompt('Want special Characters? y/n')
-  //   var result = ''
-  //   if(options === 'n') {
-  //     result = 'ABCDEFGHIJKLMNOP1234567890'
-  //   } else {
-  //     return words
-  //   }
-  //   return result
-  // }
-
-  //var specialChar = "!#$%&'()*+-./:;<=>?@[\]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-
-
-  //FOR SPECIAL CHARS
-  var options = prompt('Would you like to add Special Characters? (y/n)')
-  var result = ''
-  if (options.toLowerCase() === 'y') {
-    result = "!#$%&'()*+-./:;<=>?@[\]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-  } else if (options.toLowerCase() === 'n') {
-    result = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-  } else {
-    result = 'Invalid'
+  function passLength(string) {
+    var result = [];
+    var option = prompt('Enter the password length') 
+      for(var i = 0; i < option; i++) {
+        if(option < 8 || option > 128) {
+          return alert('Denied, enter 8 - 128')
+        } else {
+          result.push(string[i])
+        }
+      }
+      return result
+    }
+// FUNCTION FOR ADDING SPECIAL CHARACTERS
+  function specialC(string) {
+    var result = confirm('Add special?') 
+      if(result === true) {
+        return string += "!#$%&'()*+-./:;<=>?@[\]^_`{|}~";
+      } else {
+        return string
+      }
   }
-  
-  var upperOrLower = prompt('Press L for lowerCase, U for upperCase')
-  if(upperOrLower.toLowerCase() === 'l') {
-    result = result.toLowerCase()
-  } else {
-    result = result.toLocaleUpperCase();
-  }
-  
-
-  var passLength = prompt('How long???');
-  var mixedChar = shufflePass(result.split(''));//CONVERTS STRING TO ARRAY
-  var tempPass = []; //<-- EMPTY ARRAY
-  var randomNumber = Math.floor(Math.random() * mixedChar.length);
-
-  for (i = 0; i < passLength; i++) {
-    if (passLength < 8 || passLength > 128) {
-      result = alert('DENIED!, PLEASE ENTER BETWEEN 8 - 128!!')
-      break; //DENIED
+// FUNCTION FOR LOWER OR UPPER CASE CHARACTERS
+  function lowerOrUpper(string) {
+    var result = confirm('Would you like to include lower case letters?')
+    if(result === true) {
+      return string.toLowerCase()
     } else {
-      tempPass.push(mixedChar[i])//WILL ADD EVERY CHARAC AT [i]
+      return string
     }
   }
+// FUNCTION FOR ADDING NUMBERS
+
+  function addNums(string) {
+    var result = confirm('Want to add numbers? (y/n)')
+    if(result === true) {
+      return string += '1234567890'
+    } else {
+      return string
+    }
+  }
+  //-------------------------------------------------------------------
 
 
+  //----------------------FUNCTION EXPRESSIONS-------------------------
+
+  //ORIGINAL CHARACTERS
+  var originalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  //STEP 1: ADD SPECIAL CHARACTERS IF TRUE
+  var addSpecial = specialC(originalChars)
+  console.log(addSpecial)
+
+  //STEP 2: ADD NUMBERS IF TRUE
+  var addNumbers = addNums(addSpecial)
+  console.log(addNumbers)
+  //STEP 3: LOWERCASE IF TRUE, UPPERCASE IF FALSE
+  var letterSize = lowerOrUpper(addNumbers);
+  console.log(letterSize)
+  //STEP 4: MIXED SHUFFLE
+  var mixedChar = shufflePass(letterSize)
+  console.log(mixedChar)
+  //STEP 5: HOW LONG THE PASSWORD WILL BE
+  var howLong = passLength(mixedChar);
+  console.log(howLong)
 
 
-  var passComplete = tempPass.join(''); // REMOVES COMMAS BETWEEN BECAUSE ITS AN ARRAY
-  var result = document.querySelector('#password').innerHTML = passComplete;
+  
+  var result = document.querySelector('#password').innerHTML = howLong;
   return result
 }
 
-
-
-
-
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
