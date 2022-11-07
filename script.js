@@ -17,10 +17,20 @@ function writePassword() {
 
 
 function generatePassword() {
+
+
+  function includeSpec(words) {
+    var options = prompt('Want special Characters? y/n')
+    if (options.toLowerCase === 'n') {
+      words = 'ABCDEFGHIJKLMNOP1234567890'
+    } else {
+      return words
+    }
+  }
   //SHUFFLE CHARACTERS
   function shufflePass(array) {
     // for(var i = array.length - 1; i > 0; i--) {
-      for(var i = 0; i < array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
       var randomNum = Math.floor(Math.random() * (i + 1));
       var temp = array[i];
       array[i] = array[randomNum];
@@ -29,21 +39,51 @@ function generatePassword() {
     return array;
 
   }
-  var specialChar = "!#$%&'()*+-./:;<=>?@[\]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-  var mixedChar = shufflePass(specialChar.split(''));//CONVERTS STRING TO ARRAY
+
+  // function includeSpec(words) {
+  //   var options = prompt('Want special Characters? y/n')
+  //   var result = ''
+  //   if(options === 'n') {
+  //     result = 'ABCDEFGHIJKLMNOP1234567890'
+  //   } else {
+  //     return words
+  //   }
+  //   return result
+  // }
+
+  //var specialChar = "!#$%&'()*+-./:;<=>?@[\]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+
+
+  //FOR SPECIAL CHARS
+  var options = prompt('Would you like to add Special Characters? (y/n)')
+  var result = ''
+  if (options.toLowerCase() === 'y') {
+    result = "!#$%&'()*+-./:;<=>?@[\]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+  } else if (options.toLowerCase() === 'n') {
+    result = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+  } else {
+    result = 'Invalid'
+  }
+ 
+  
+
   var passLength = prompt('How long???');
+  var mixedChar = shufflePass(result.split(''));//CONVERTS STRING TO ARRAY
   var tempPass = []; //<-- EMPTY ARRAY
   var randomNumber = Math.floor(Math.random() * mixedChar.length);
 
-  for(i = 0; i < passLength; i++) {
-    if(passLength < 8 || passLength > 128) {
+  for (i = 0; i < passLength; i++) {
+    if (passLength < 8 || passLength > 128) {
       result = alert('DENIED!, PLEASE ENTER BETWEEN 8 - 128!!')
       break; //DENIED
     } else {
       tempPass.push(mixedChar[i])//WILL ADD EVERY CHARAC AT [i]
     }
-    }
-  
+  }
+
+
+
+
   var passComplete = tempPass.join(''); // REMOVES COMMAS BETWEEN BECAUSE ITS AN ARRAY
   var result = document.querySelector('#password').innerHTML = passComplete;
   return result
