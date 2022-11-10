@@ -7,7 +7,7 @@ var generateBtn = document.querySelector("#generate");//BUTTON
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();//FUNCTION AT LINE 19
+  var password = generatePassword();
   //after
   var passwordText = document.querySelector("#password");
 
@@ -45,7 +45,7 @@ function generatePassword() {
     }
 // FUNCTION FOR ADDING SPECIAL CHARACTERS
   function specialC(string) {
-    var result = confirm('Add special?') 
+    var result = confirm('Add special characters?') 
       if(result === true) {
         return string += "!#$%&'()*+-./:;<=>?@[\]^_`{|}~";
       } else {
@@ -54,7 +54,7 @@ function generatePassword() {
   }
 // FUNCTION FOR LOWER OR UPPER CASE CHARACTERS
   function lowerOrUpper(string) {
-    var result = confirm('Would you like to include lower case letters?')
+    var result = confirm('Would you like lower case letters?')
     if(result === true) {
       return string.toLowerCase()
     } else {
@@ -95,11 +95,40 @@ function generatePassword() {
   var howLong = passLength(mixedChar);
   console.log(howLong)
 
+  // function randomCase(string) {
+    
+  //   newArr = [];
+  //   for(var i = 0; i < string.length; i++) {
+      
+  //     var newString = '';
+      
+  //     for(var j = 0; j < string[i].length;j++) {
+        
+  //     if(j % 2 === 0) {
+  //       newString += string[j].charAt(i).toUpperCase();
+  //       } else {
+  //       newString += string[j].charAt(i).toLowerCase()
+  //       }
+  //     }
+  //     newArr.push(newString);
+  //     } 
+      
+  //     return newArr.join('')
+
+  //   }
+    
+  
+
+
+
+
 
   
   var result = document.querySelector('#password').innerHTML = howLong;
   return result
 }
+
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
