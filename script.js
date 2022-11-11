@@ -64,7 +64,7 @@ function generatePassword() {
 // FUNCTION FOR ADDING NUMBERS
 
   function addNums(string) {
-    var result = confirm('Want to add numbers? (y/n)')
+    var result = confirm('Want to add numbers?')
     if(result === true) {
       return string += '1234567890'
     } else {
@@ -97,7 +97,7 @@ function generatePassword() {
 
 
   
-  var result = document.querySelector('#password').innerHTML = howLong;
+  var result = document.querySelector('#password').innerHTML = howLong.join('');
   return result
 }
 
