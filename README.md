@@ -6,3 +6,7 @@ Here I present:
 
 Password Generator
 https://erive92d.github.io/Password-Generator/
+
+Screenshot:
+![passwordGen](https://user-images.githubusercontent.com/110507887/202500337-00e59a1d-96ed-4084-9a49-a408b474477c.png)
+
